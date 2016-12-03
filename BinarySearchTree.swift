@@ -1,5 +1,5 @@
 //
-//  BinaryEarchTree.swift
+//  BinarySearchTree.swift
 //  AlgorithmsSwift
 //
 //  Created by siva kongara on 12/2/16.
