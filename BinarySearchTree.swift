@@ -1,5 +1,5 @@
 //
-//  BinarySearchTree.swift
+//  BinaryTree.swift
 //  AlgorithmsSwift
 //
 //  Created by siva kongara on 12/2/16.
@@ -225,7 +225,45 @@ class BinarySearchTree: NSObject {
                 }
             }
         }
-        
+    }
+
+    func printSameLevelNodesOnOneLine() {
+        let printTuplesArray = nodesWithsameLevel(root, level: 0)
+        var sortedArray = printTuplesArray.sort { (first:(Int, Int), second:(Int, Int)) -> Bool in
+            return first.1 < second.1
+        }
+        var i = 0
+        var temp = ""
+        var tempIndexcount = 0
+        while sortedArray.count != tempIndexcount {
+            for j in 0..<sortedArray.count {
+                if sortedArray[j].1 == i {
+                    temp = temp + "\(sortedArray[j].0)" + ","
+                    tempIndexcount += 1
+                }
+            }
+            print(temp)
+            temp = ""
+            i += 1
+        }
+    }
+
+    private func nodesWithsameLevel(node:Node,level:Int) ->[(Int,Int)]{
+        var retVal:[(Int,Int)] = [(Int,Int)]()
+        retVal.append((node.data!,level))
+        if node.left != nil {
+            let nextElements = nodesWithsameLevel(node.left!,level: level + 1)
+            for element in nextElements {
+                retVal.append(element)
+            }
+        }
+        if node.right != nil {
+            let nextElements = nodesWithsameLevel(node.right!,level: level + 1)
+            for element in nextElements {
+                retVal.append(element)
+            }
+        }
+        return retVal
     }
 
 }
